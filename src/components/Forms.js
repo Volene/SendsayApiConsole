@@ -9,18 +9,24 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers";
 
 export const Forms = () => {
+  const containsProhibitedCharacters = (string) => /[^.a-z]+/gi.test(string);
+
   const schema = yup.object({
     req: yup.object({
-      action: yup.string().required(),
+      action: yup
+        .string()
+        .test(
+          "Should not contain a prohibited characters",
+          (value) => !containsProhibitedCharacters(value)
+        )
+        .required(),
     }),
   });
-
 
   const currentRequest = useSelector(
     (state) => state.queryHistorySlice.currentRequest
   );
   const executedRequest = useSelector((state) => state.querySlice.query);
-
 
   const dispatch = useDispatch();
   const requestRef = useRef();

@@ -1,17 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { ReactComponent as DropdownIcon } from "../../img/dropdown.svg";
 import { ToggleLayer } from "react-laag";
+import { setCopied } from "../../redux/features/ui";
 
 import "./QueryItem.css";
 import { DropdownMenu } from "./DropdownMenu";
 
-
 export const QueryItem = (props) => {
+  const dispatch = useDispatch();
   const [isHovered, setHovered] = useState(false);
+  const { copied, copiedId } = useSelector((state) => state.uiSlice);
+  const isCopiedItem = props.id === copiedId;
+  
+  useEffect(() => {
+    if (isCopiedItem) {
+      const timer = setTimeout(() => dispatch(setCopied(false)), 1900);
+      return () => {
+        clearInterval(timer);
+      };
+    }
+  }, [dispatch, copied, isCopiedItem]);
 
   return (
     <ToggleLayer
-      renderLayer={({ isOpen, layerProps, }) =>
+      renderLayer={({ isOpen, layerProps }) =>
         isOpen && (
           <DropdownMenu
             query={props.query}
@@ -34,7 +47,7 @@ export const QueryItem = (props) => {
           "RIGHT_CENTER",
           "TOP_CENTER",
         ],
-        
+
         autoAdjust: true,
         preferX: "RIGHT",
         triggerOffset: 30,
@@ -49,6 +62,9 @@ export const QueryItem = (props) => {
           onMouseLeave={() => setHovered(false)}
         >
           <div className="query-wrapper">
+            {isCopiedItem && copied && (
+              <div className="copied">Скопировано</div>
+            )}
             <div
               className={`query__status query__status--${
                 !props.error ? "success" : "error"

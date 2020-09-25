@@ -22,7 +22,9 @@ body {
 #root {
   height: 100vh;
 }
-
+.fullscreen{
+  height: 100%;
+}
 .page__body {
   display: flex;
   flex-direction: column;

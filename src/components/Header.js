@@ -2,12 +2,13 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Cookies from "js-cookie";
 import { logout as logoutAction } from "../redux/features/authSlice";
+import {FullscreenButton} from './FullscreenComponent'
 import { Logout } from "./Logout";
 import "./Header.css";
 import Logo from "../img/logo.svg";
 import { ReactComponent as FsIcon } from "../img/fs.svg";
 
-export const Header = () => {
+export const Header = (props) => {
   const { subLoginName, loginName } = useSelector((state) => state.authSlice);
   const dispatch = useDispatch();
 
@@ -25,7 +26,7 @@ export const Header = () => {
         </div>
 
         <div className="header__right-wrapper">
-          <div className="header_account account">
+          <div className="header__account account">
             <div className="account__login">{loginName}</div>
             {!isSubloginExist ? null : (
               <>
@@ -35,9 +36,7 @@ export const Header = () => {
             )}
           </div>
           <Logout tabIndex={1} onLogoutClick={logout}></Logout>
-          <div className="header__fullscreen-button fullscreen-button" tabIndex={2}>
-            <FsIcon   className="fullscreen-button__icon"src={FsIcon} alt="fullscreen-button__icon" />
-          </div>
+        <FullscreenButton fsHandler={props.fullsreenHandler}/>
         </div>
       </header>
     </>

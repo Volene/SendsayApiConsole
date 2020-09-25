@@ -1,6 +1,6 @@
 .dropdown {
   position: fixed;
-  width: 133px;
+  width: 141px;
   top: 92px;
   z-index: 999;
   background-color: var(--bg);
@@ -12,21 +12,32 @@
 .menu {
   width: 100%;
   background-color: white;
-  display: grid;
-  grid-template-rows: auto;
-  grid-template-columns: 1fr;
   border-radius: 3px;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
 
 }
 
 .menu__item {
-
   display: flex;
   height: 40px;
   align-items: center;
   padding-left: 15px;
   cursor: pointer;
+  width: 100%;
+}
+
+
+.menu__item-wrapper {
+  display: flex;
+  height: 45px;
+  align-items: flex-start;
+
+}
+
+.menu__item-wrapper:last-child {
+  height: 50px;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  align-items: center;
 }
 
 .menu__item--delete:hover {

@@ -1,0 +1,38 @@
+.copied {
+  position: absolute;
+  width: 74px;
+  height: 20px;
+  font-size: 11px;
+  line-height: 20px;
+  background-color: #f6f6f6;
+  color: #0D0D0D;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  animation: 2s linear  fadeOut;
+
+}
+
+@keyframes fadeOut {
+  0% {
+    bottom: 5px;
+  }
+
+  50% {
+    bottom: 10px
+  }
+
+  50% {
+    background-color: hsla(0, 0%, 96%, 0.5);
+    bottom: 15px;
+  }
+  75% {
+    background-color: hsla(0, 0%, 96%, 0.3);
+    bottom: 24px;
+  }
+
+  100% {
+    background-color: hsla(0, 0%, 96%, 0);
+    bottom: 30px
+  }
+}

@@ -30,7 +30,6 @@ const LoginForm = () => {
   };
 
   const onSubmit = async (data) => {
-    console.log(data);
     dispatch(sendSayAuth(data));
   };
   // const formatErrorMessage = (str) => str.split(",").join(", ");

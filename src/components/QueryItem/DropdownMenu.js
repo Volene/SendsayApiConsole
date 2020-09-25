@@ -3,50 +3,28 @@ import "./DropdownMenu.css";
 import { useDispatch } from "react-redux";
 import { removeQuery } from "../../redux/features/queryHistorySlice";
 import { setQuery } from "../../redux/features/querySlice";
-
+import { CopyToClipboardContainer } from "./CopyToClipboard";
 export const DropdownMenu = React.forwardRef((props, ref) => {
   const dispatch = useDispatch();
-  const menuItems = [
-    {
-      type: "",
-      height: 45,
-      alignSelf: "bottom",
-      title: "Выполнить",
-      cb: () => dispatch(setQuery(props.query)),
-    },
-    { type: "divider", height: 1 },
-    { type: "copy", height: 50, alignSelf: "center", title: "Скопировать" },
-    { type: "divider", height: 1 },
-    {
-      type: "delete",
-      height: 50,
-      alignSelf: "center",
-      title: "Удалить",
-      cb: () => dispatch(removeQuery(props.id)),
-    },
-  ];
-
-  const gridRows = menuItems.reduce(
-    (rows, item) => (rows += item.height + "px "),
-    ""
-  );
+  const handleExecQuery = () => dispatch(setQuery(props.query));
+  const handleRemoveQuery = () => removeQuery(props.id);
   const menuItemClasses = {
     delete: "menu__item--delete",
     copy: "menu__item--copy",
     divider: "menu__item__divider",
   };
 
-  function DropdownItem({ props }) {
-    return (
-      <div
-        className={`menu__item  ${menuItemClasses[props.type]}`}
-        style={{ alignSelf: props.alignSelf }}
-        onClick={props.cb ? props.cb : null}
-      >
-        {props.title}
-      </div>
-    );
-  }
+  // function DropdownItem(props) {
+  //   return (
+  //     <li
+  //       className={`menu__item  ${menuItemClasses[props.type]}`}
+  //       style={{ alignSelf: props.alignSelf }}
+  //       onClick={props.cb ? props.cb : null}
+  //     >
+  //       {props.title}
+  //     </li>
+  //   );
+  // }
 
   return (
     <div>
@@ -54,15 +32,33 @@ export const DropdownMenu = React.forwardRef((props, ref) => {
         <div
           className="menu"
           style={{
-            gridTemplateRows: gridRows,
             ...props.style,
-            top: props.style.top - 30,
-            // left: props.style.left - 40,
+            top: props.style.top - 30 || 0,
           }}
         >
-          {menuItems.map((item, i) => (
+          <div className="menu__item-wrapper">
+            <div onClick={handleExecQuery} className={`menu__item `}>
+              Выполнить
+            </div>
+          </div>
+          <div className="menu__item-wrapper">
+            <CopyToClipboardContainer id={props.id} query={props.query}>
+              <div className={`menu__item ${menuItemClasses.copy}`}>
+                Скопировать
+              </div>
+            </CopyToClipboardContainer>
+          </div>
+          <div className="menu__item-wrapper">
+            <div
+              onClick={handleRemoveQuery}
+              className={`menu__item ${menuItemClasses.delete}`}
+            >
+              Удалить
+            </div>
+          </div>
+          {/* {menuItems.map((item, i) => (
             <DropdownItem key={i} props={item} />
-          ))}
+          ))} */}
         </div>
       </div>
     </div>
