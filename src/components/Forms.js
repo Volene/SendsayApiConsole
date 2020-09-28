@@ -1,12 +1,13 @@
 import React, { useRef, useEffect, useCallback } from "react";
-import "./Forms.css";
-import { ReactComponent as FmIcon } from "../img/align-right.svg";
-import { useForm } from "react-hook-form";
-import { SplitContainer } from "./SplitContainer";
 import { useDispatch, useSelector } from "react-redux";
-import { getQueryResponse } from "../redux/features/queryHistorySlice";
+import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers";
+import "./Forms.css";
+import { SplitContainer } from "./SplitContainer";
+import { getQueryResponse } from "../redux/features/queryHistorySlice";
+import { ReactComponent as FmIcon } from "../img/align-right.svg";
+import octocat from "../img/Octocat.jpg";
 
 export const Forms = () => {
   const containsProhibitedCharacters = (string) => /[^.a-z]+/gi.test(string);
@@ -34,7 +35,7 @@ export const Forms = () => {
   const { register, handleSubmit, errors } = useForm({
     mode: "onSubmit",
     reValidateMode: "onSubmit",
-    shouldFocusError: false,
+    shouldFocusError: true,
     resolver: yupResolver(schema),
   });
 
@@ -71,7 +72,7 @@ export const Forms = () => {
           <div className="container">
             <div className="textarea-container textarea">
               <SplitContainer className="wrap" sizes={[50, 50]}>
-                <div className="left">
+                <div className="left-split-container">
                   <div
                     className={`textarea__caption ${
                       errors.req && "textarea__caption--error"
@@ -102,7 +103,7 @@ export const Forms = () => {
                     }`}
                   ></textarea>
                 </div>
-                <div className="right">
+                <div className="right-split-container">
                   <div
                     className={`textarea__caption ${
                       currentRequest.error && "textarea__caption--error"
@@ -117,17 +118,40 @@ export const Forms = () => {
                       register(e);
                       responseRef.current = e;
                     }}
-                    className={`request__input input textarea ${
-                      currentRequest.error && "input--error"
-                    }`}
+                    className={`request__input ${
+                      currentRequest.error && "input--error" 
+                    } input textarea `}
                   ></textarea>
                 </div>
               </SplitContainer>
             </div>
-            <div className="footer">
+            <div className="forms__control">
               <button type="submit">Отправить</button>
-              {/* <a>link to github</a> */}
-              <div>ГитхабЛинк</div>
+              
+              <a
+                  href="https://github.com/Volene"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+              <div className="link-container">              
+                  
+                    <img
+                    className="github-logo"
+                      style={{ width: "40px" }}
+                      src={octocat}
+                      alt="octocat"
+                    />{" "}
+                    Volene
+                    <img
+                      className="github-logo"
+                      style={{ width: "40px" }}
+                      src={octocat}
+                      alt="octocat"
+                    />
+                  
+                
+              </div>
+              </a>
               <div onClick={formatJSON} tabIndex="9" className="format_text">
                 <FmIcon
                   className="format_icon"

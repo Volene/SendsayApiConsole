@@ -5,7 +5,6 @@ export const uiSlice = createSlice({
   initialState: {
     copied: false,
     copiedId:null,
-    isFs:false
   },
   reducers: {
     setCopied: (state,{payload}) => {

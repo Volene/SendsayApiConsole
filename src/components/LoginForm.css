@@ -84,8 +84,12 @@
 .input--error {
   border: 1px solid #CF2C00;
   box-shadow: 0px 0px 5px rgba(207, 44, 0, 0.5);
+  
 }
-
+.input--error:focus{
+  border: 1px solid #CF2C00;
+  box-shadow: 0px 0px 5px rgba(207, 44, 0, 0.5);
+}
 .label-wrapper {
   display: flex;
   justify-content: space-between;
@@ -161,11 +165,12 @@ button:hover {
 
 button:focus {
   background: linear-gradient(180deg, #45A6FF 0%, #0055FB 100%), #C4C4C4;
-
-  /* solid #45A5FF; */
-
   box-shadow: 0 0 0 2px rgba(69, 165, 255, 0.5);
   border-radius: 7px;
+}
+
+button:disabled{
+  background: linear-gradient(0deg, #C4C4C4, #C4C4C4),
 }
 
 button:disabled {

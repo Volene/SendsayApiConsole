@@ -7,24 +7,13 @@ import { CopyToClipboardContainer } from "./CopyToClipboard";
 export const DropdownMenu = React.forwardRef((props, ref) => {
   const dispatch = useDispatch();
   const handleExecQuery = () => dispatch(setQuery(props.query));
-  const handleRemoveQuery = () => removeQuery(props.id);
+  const handleRemoveQuery = () => dispatch(removeQuery(props.id));
+  
   const menuItemClasses = {
     delete: "menu__item--delete",
     copy: "menu__item--copy",
     divider: "menu__item__divider",
   };
-
-  // function DropdownItem(props) {
-  //   return (
-  //     <li
-  //       className={`menu__item  ${menuItemClasses[props.type]}`}
-  //       style={{ alignSelf: props.alignSelf }}
-  //       onClick={props.cb ? props.cb : null}
-  //     >
-  //       {props.title}
-  //     </li>
-  //   );
-  // }
 
   return (
     <div>
@@ -56,9 +45,6 @@ export const DropdownMenu = React.forwardRef((props, ref) => {
               Удалить
             </div>
           </div>
-          {/* {menuItems.map((item, i) => (
-            <DropdownItem key={i} props={item} />
-          ))} */}
         </div>
       </div>
     </div>

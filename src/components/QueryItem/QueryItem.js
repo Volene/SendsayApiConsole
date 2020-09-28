@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { ReactComponent as DropdownIcon } from "../../img/dropdown.svg";
 import { ToggleLayer } from "react-laag";
-import { setCopied } from "../../redux/features/ui";
-
-import "./QueryItem.css";
 import { DropdownMenu } from "./DropdownMenu";
+import "./QueryItem.css";
+import { setCopied } from "../../redux/features/ui";
+import { ReactComponent as DropdownIcon } from "../../img/dropdown.svg";
+
+
+
 
 export const QueryItem = (props) => {
   const dispatch = useDispatch();
@@ -35,6 +37,7 @@ export const QueryItem = (props) => {
             style={{
               ...layerProps.style,
               width: 126,
+              left:layerProps.style.left+15||0
             }}
           ></DropdownMenu>
         )
@@ -42,9 +45,9 @@ export const QueryItem = (props) => {
       placement={{
         anchor: "BOTTOM_RIGHT",
         possibleAnchors: [
-          "LEFT_CENTER",
+
           "BOTTOM_CENTER",
-          "RIGHT_CENTER",
+
           "TOP_CENTER",
         ],
 
@@ -58,6 +61,7 @@ export const QueryItem = (props) => {
       {({ triggerRef, toggle }) => (
         <div
           className="query"
+          onClick={toggle}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
         >
@@ -72,7 +76,7 @@ export const QueryItem = (props) => {
             ></div>
             <div className="query__type">{props.type}</div>
           </div>
-          <div className="dropdown__icon" ref={triggerRef} onClick={toggle}>
+          <div className="dropdown__icon" ref={triggerRef}>
             <DropdownIcon />
           </div>
         </div>

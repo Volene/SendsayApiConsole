@@ -1,8 +1,9 @@
 import React from "react";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useDispatch} from "react-redux";
-import { setCopied,setCopiedId} from "../../redux/features/ui";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import "./CopyToClipBoard.css";
+import { setCopied,setCopiedId} from "../../redux/features/ui";
+
 
 export const CopyToClipboardContainer = ({ id,query,children }) => {
   const dispatch = useDispatch();

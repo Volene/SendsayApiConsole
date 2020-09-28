@@ -3,26 +3,50 @@ import { useDispatch, useSelector } from "react-redux";
 import "./LoginForm.css";
 import { useForm } from "react-hook-form";
 import Cookies from "js-cookie";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers";
 import { sendSayAuth, renewSessions } from "../redux/features/authSlice";
 import Logo from "../img/logo.svg";
 import SadSmile from "../img/mehsmile.svg";
 import Loader from "../img/loader.svg";
-
-// import { ReactComponent as Logo } from "../img/logo.svg";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const loginError = useSelector((state) => state.authSlice.error);
   const isLogging = useSelector((state) => state.authSlice.logging);
 
+  const containsProhibitedCharacters = (string) => /[^a-z_0-9]+/gi.test(string);
+  const passwordContainsProhibitedCharacters = (string) =>
+    /[^a-z_0-9\s]+/gi.test(string);
+
+  const schema = yup.object({
+    loginName:
+      yup.string().email().required() |
+      yup
+        .string()
+        .test(
+          "Should not contain a prohibited characters",
+          (value) => !containsProhibitedCharacters(value)
+        )
+        .required(),
+    subLoginName: yup.string().min(3),
+    password: yup
+      .string()
+      .test(
+        "Should not contain a prohibited characters",
+        (value) => !passwordContainsProhibitedCharacters(value)
+      )
+      .required(),
+  });
+
   const { register, handleSubmit, errors } = useForm({
     mode: "onSubmit",
     reValidateMode: "onChange",
-    // validateCriteriaMode: "firstError",
     submitFocusError: true,
+    resolver: yupResolver(schema),
   });
+
   const styles = {
-    // divErrorStyle: { color: "#CF2C00" },
     inputErrorStyle: {
       border: "1px solid #CF2C00",
       boxShadow: "0px 0px 5px rgba(207, 44, 0, 0.5)",
@@ -32,13 +56,12 @@ const LoginForm = () => {
   const onSubmit = async (data) => {
     dispatch(sendSayAuth(data));
   };
-  // const formatErrorMessage = (str) => str.split(",").join(", ");
 
   React.useEffect(() => {
-    async function sss() {
+    async function tryRestoreSession() {
       dispatch(renewSessions());
     }
-    if (Cookies.get("sendsay_session")) sss();
+    if (Cookies.get("sendsay_session")) tryRestoreSession();
   }, [dispatch]);
 
   return (

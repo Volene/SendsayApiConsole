@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./HistoryTrack.css";
-import clearIcon from "../img/clearhistory.svg";
 import { QueryItem } from "./QueryItem/QueryItem";
 import { removeQueries } from "../redux/features/queryHistorySlice";
+import clearIcon from "../img/clearhistory.svg";
 
 export const HistoryTrack = () => {
 

@@ -28,12 +28,11 @@ export const queriesHistorySlice = createSlice({
       state.query = payload;
     },
     addQuery: (state, { payload }) => {
-      console.log(payload)
       const actionType =
         payload.query
           .match(/"action": "[a-z.]+"/g)[0]
           .split(":")[1]
-          .replace(/[^\w.]/g, "")  ?? "";
+          .replace(/[^\w.]/g, "") ?? "";
 
       const id = new Date().toISOString();
       const queryObject = {
@@ -62,15 +61,16 @@ export const queriesHistorySlice = createSlice({
         );
         state.queries.splice(idx, 1);
         state.queries.unshift(queryObject);
+        
+        if (state.queries > 15) state.queries.pop();
       }
     },
     removeQuery: (state, queryId) => {
-      console.log(queryId);
       const idx = state.queries.findIndex((query) => query.id === queryId);
       state.queries.splice(idx, 1);
     },
     removeQueries: (state) => {
-      if(state.queries.length) state.queries = [];
+      if (state.queries.length) state.queries = [];
     },
   },
 });

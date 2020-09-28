@@ -1,5 +1,6 @@
 import React from "react";
 import LogoutIcon from "../img/log-out.svg";
+
 export const Logout = (props) => {
   const { onLogoutClick } = props;
 

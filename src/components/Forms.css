@@ -1,7 +1,11 @@
 :root {
   --main-color: #0055FB;
 }
-
+a{
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 700;
+}
 .form {
   display: flex;
   width: 100%;
@@ -26,6 +30,27 @@
 }
 .textarea__caption--error{
   color: #CF2C00;
+}
+
+.link-container{
+  display:flex;
+  align-items: center;
+  width: 150px;
+  justify-content: space-between;
+}
+
+.link-container:hover .github-logo {
+  animation: github-logo-spin infinite 5s linear;
+}
+
+@keyframes github-logo-spin{
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 textarea {
@@ -65,7 +90,7 @@ textarea {
 }
 
 
-.left {
+.left-split-container {
   margin-left: 20px;
   outline: none;
 }
@@ -74,7 +99,7 @@ textarea {
   outline: none;
 }
 
-.right {
+.right-split-container {
   margin-right: 20px;
   position: relative
 }
@@ -115,7 +140,7 @@ textarea {
   outline: none;
 }
 
-.footer {
+.forms__control {
   display: flex;
   flex-shrink: 0;
   width: 100%;
@@ -154,3 +179,17 @@ textarea {
   stroke: var(--main-color)
 }
 
+@media only screen and (max-width: 450px) {
+  .github-logo{
+    display: none;
+  }
+  .link-container{
+    width: 100%;
+  }
+  .left-split-container{
+    margin-left:5px
+  }
+  .right-split-container{
+    margin-right:5px
+  }
+}
