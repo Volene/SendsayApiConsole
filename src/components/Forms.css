@@ -1,11 +1,13 @@
 :root {
   --main-color: #0055FB;
 }
-a{
+
+a {
   text-decoration: none;
   text-transform: uppercase;
   font-weight: 700;
 }
+
 .form {
   display: flex;
   width: 100%;
@@ -28,12 +30,13 @@ a{
   margin-top: 10px;
   margin-bottom: 3px;
 }
-.textarea__caption--error{
+
+.textarea__caption--error {
   color: #CF2C00;
 }
 
-.link-container{
-  display:flex;
+.link-container {
+  display: flex;
   align-items: center;
   width: 150px;
   justify-content: space-between;
@@ -43,7 +46,7 @@ a{
   animation: github-logo-spin infinite 5s linear;
 }
 
-@keyframes github-logo-spin{
+@keyframes github-logo-spin {
   from {
     transform: rotate(0deg);
   }
@@ -68,7 +71,7 @@ textarea {
 .wrap {
   display: flex;
   width: 100%;
-  margin-bottom: 15px;
+  padding-bottom: 15px;
 }
 
 .drag-icon {
@@ -113,17 +116,19 @@ textarea {
 
 .gutter::before {
   position: absolute;
-  top:50%;
-  left:2px;
+  top: 50%;
+  left: 2px;
   content: url("data:image/svg+xml,%3Csvg width='5' height='18' viewBox='0 0 6 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0)'%3E%3Ccircle cx='2.92859' cy='2' r='2' fill='black' fill-opacity='0.2'/%3E%3Ccircle cx='2.92859' cy='9' r='2' fill='black' fill-opacity='0.2'/%3E%3Ccircle cx='2.92859' cy='16' r='2' fill='black' fill-opacity='0.2'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0'%3E%3Crect width='4' height='18' fill='white' transform='translate(0.928589)'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
 }
 
 .gutter:hover {
   cursor: col-resize
 }
-.gutter:hover::before{
-  content:url("data:image/svg+xml,%3Csvg width='5' height='18' viewBox='0 0 6 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0)'%3E%3Ccircle cx='2.92859' cy='2' r='2' fill='black' fill-opacity='0.4'/%3E%3Ccircle cx='2.92859' cy='9' r='2' fill='black' fill-opacity='0.4'/%3E%3Ccircle cx='2.92859' cy='16' r='2' fill='black' fill-opacity='0.4'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0'%3E%3Crect width='4' height='18' fill='white' transform='translate(0.928589)'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
+
+.gutter:hover::before {
+  content: url("data:image/svg+xml,%3Csvg width='5' height='18' viewBox='0 0 6 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0)'%3E%3Ccircle cx='2.92859' cy='2' r='2' fill='black' fill-opacity='0.4'/%3E%3Ccircle cx='2.92859' cy='9' r='2' fill='black' fill-opacity='0.4'/%3E%3Ccircle cx='2.92859' cy='16' r='2' fill='black' fill-opacity='0.4'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0'%3E%3Crect width='4' height='18' fill='white' transform='translate(0.928589)'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
 }
+
 .gutter:hover .drag-icon:hover g circle {
   fill-opacity: 0.4;
 }
@@ -148,7 +153,7 @@ textarea {
   align-items: center;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   height: 70px;
-  margin-top: auto;
+  /* margin-top: auto; */
 }
 
 .format_text {
@@ -180,16 +185,23 @@ textarea {
 }
 
 @media only screen and (max-width: 450px) {
-  .github-logo{
+  .github-logo {
     display: none;
   }
-  .link-container{
+
+  .link-container {
     width: 100%;
   }
-  .left-split-container{
-    margin-left:5px
+
+  .left-split-container {
+    margin-left: 5px
   }
-  .right-split-container{
-    margin-right:5px
+
+  .right-split-container {
+    margin-right: 5px
   }
+}
+
+@media only screen and (max-width: 450px) {
+  .forms__control {}
 }

@@ -5,7 +5,9 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers";
 import "./Forms.css";
 import { SplitContainer } from "./SplitContainer";
-import { getQueryResponse } from "../redux/features/queryHistorySlice";
+import {
+  getQueryResponse,
+} from "../redux/features/queryHistorySlice";
 import { ReactComponent as FmIcon } from "../img/align-right.svg";
 import octocat from "../img/Octocat.jpg";
 
@@ -119,7 +121,7 @@ export const Forms = () => {
                       responseRef.current = e;
                     }}
                     className={`request__input ${
-                      currentRequest.error && "input--error" 
+                      currentRequest.error && "input--error"
                     } input textarea `}
                   ></textarea>
                 </div>
@@ -127,30 +129,27 @@ export const Forms = () => {
             </div>
             <div className="forms__control">
               <button type="submit">Отправить</button>
-              
+
               <a
-                  href="https://github.com/Volene"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-              <div className="link-container">              
-                  
-                    <img
+                href="https://github.com/Volene"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="link-container">
+                  <img
                     className="github-logo"
-                      style={{ width: "40px" }}
-                      src={octocat}
-                      alt="octocat"
-                    />{" "}
-                    Volene
-                    <img
-                      className="github-logo"
-                      style={{ width: "40px" }}
-                      src={octocat}
-                      alt="octocat"
-                    />
-                  
-                
-              </div>
+                    style={{ width: "40px" }}
+                    src={octocat}
+                    alt="octocat"
+                  />{" "}
+                  Volene
+                  <img
+                    className="github-logo"
+                    style={{ width: "40px" }}
+                    src={octocat}
+                    alt="octocat"
+                  />
+                </div>
               </a>
               <div onClick={formatJSON} tabIndex="9" className="format_text">
                 <FmIcon

@@ -5,7 +5,7 @@ import LoginForm from "./components/LoginForm";
 import { HistoryTrack } from "./components/HistoryTrack";
 import { Forms } from "./components/Forms";
 import { Header } from "./components/Header";
-import "./App.css";
+
 
 function App() {
   const isAuth = useSelector((state) => state.authSlice.isAuth);

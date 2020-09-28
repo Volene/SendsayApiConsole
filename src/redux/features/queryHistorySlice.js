@@ -1,6 +1,14 @@
 import { sendRequest } from "../../api/sendsay-api";
 import { serialize } from "../../utils";
-const { createSlice } = require("@reduxjs/toolkit");
+import { createSlice } from "@reduxjs/toolkit";
+import storage from 'redux-persist/lib/storage'
+import { persistReducer } from 'redux-persist'
+
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist:['queries']
+};
 
 const initialState = {
   queries: [],
@@ -27,6 +35,7 @@ export const queriesHistorySlice = createSlice({
     request: (state, { payload }) => {
       state.query = payload;
     },
+
     addQuery: (state, { payload }) => {
       const actionType =
         payload.query
@@ -61,7 +70,6 @@ export const queriesHistorySlice = createSlice({
         );
         state.queries.splice(idx, 1);
         state.queries.unshift(queryObject);
-        
         if (state.queries > 15) state.queries.pop();
       }
     },
@@ -75,16 +83,23 @@ export const queriesHistorySlice = createSlice({
   },
 });
 
-export default queriesHistorySlice.reducer;
+
+const persistedReducer = persistReducer(persistConfig, queriesHistorySlice.reducer);
+
+// export default queriesHistorySlice.reducer;
+
+export default persistedReducer
 export const {
   requestStart,
   requestFailed,
   requestSuccess,
+  getQuiresFromLocalStorage,
   request,
   removeQuery,
   addQuery,
   removeQueries,
 } = queriesHistorySlice.actions;
+
 
 export const getQueryResponse = (query) => async (dispatch) => {
   const serializedQuery = serialize(query);
