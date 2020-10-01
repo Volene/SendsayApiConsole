@@ -4,11 +4,12 @@ import { useDispatch } from "react-redux";
 import { removeQuery as removeQueryAction } from "../../redux/features/queryHistorySlice";
 import { setQuery } from "../../redux/features/querySlice";
 import { CopyToClipboardMenuItem } from "./CopyToClipboard";
-export const DropdownMenu = React.forwardRef((props, ref) => {
+
+export const DropdownMenu = React.forwardRef(({query,id,style}, ref) => {
 
   const dispatch = useDispatch();
-  const executeQuery = () => dispatch(setQuery(props.query));
-  const removeQuery = () => dispatch(removeQueryAction(props.id));
+  const executeQuery = () => dispatch(setQuery(query));
+  const removeQuery = () => dispatch(removeQueryAction(id));
   
   const menuItemClasses = {
     delete: "menu__item--delete",
@@ -22,8 +23,8 @@ export const DropdownMenu = React.forwardRef((props, ref) => {
         <div
           className="menu"
           style={{
-            ...props.style,
-            top: props.style.top - 30 || 0,
+            ...style,
+            top: style.top - 30 || 0,
           }}
         >
           <div className="menu__item-wrapper">
@@ -32,7 +33,7 @@ export const DropdownMenu = React.forwardRef((props, ref) => {
             </div>
           </div>
           <div className="menu__item-wrapper">
-            <CopyToClipboardMenuItem id={props.id} query={props.query}>
+            <CopyToClipboardMenuItem id={id} query={query}>
               <div className={`menu__item ${menuItemClasses.copy}`}>
                 Скопировать
               </div>

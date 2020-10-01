@@ -16,18 +16,22 @@ const LoginForm = () => {
   const isLogging = useSelector((state) => state.authSlice.logging);
 
   const containsProhibitedCharacters = (string) => /[^a-z_0-9]+/gi.test(string);
-  const passwordContainsProhibitedCharacters = (string) =>/[^a-z_0-9\s]+/gi.test(string);
+  const passwordContainsProhibitedCharacters = (string) =>
+    /[^a-z_0-9\s]+/gi.test(string);
+  const emailSchema = yup.string().email().required();
 
   const schema = yup.object({
-    loginName:
-      yup.string().email().required() |
-      yup
-        .string()
-        .test(
-          "Should not contain a prohibited characters",
-          (value) => !containsProhibitedCharacters(value)
-        )
-        .required(),
+    loginName: yup.lazy((val) =>
+      emailSchema.isValidSync(val)
+        ? yup.string().email().required()
+        : yup
+            .string()
+            .test(
+              "Should not contain a prohibited characters",
+              (value) => !containsProhibitedCharacters(value)
+            )
+            .required()
+    ),
     subLoginName: yup.string().min(3),
     password: yup
       .string()
@@ -41,7 +45,7 @@ const LoginForm = () => {
   const { register, handleSubmit, errors } = useForm({
     mode: "onSubmit",
     reValidateMode: "onChange",
-    submitFocusError: true,
+    shouldFocusError:false,
     resolver: yupResolver(schema),
   });
 
@@ -84,7 +88,9 @@ const LoginForm = () => {
 
           <div className="input-wrapper">
             <div
-              className={`input__label ${errors.password && 'input_label--error'}`}
+              className={`input__label ${
+                errors.password && "input_label--error"
+              }`}
             >
               Логин
             </div>
@@ -113,7 +119,9 @@ const LoginForm = () => {
 
           <div className="input-wrapper">
             <div
-              className={`input__label ${errors.password && 'input_label--error'}`}
+              className={`input__label ${
+                errors.password && "input_label--error"
+              }`}
             >
               Пароль
             </div>

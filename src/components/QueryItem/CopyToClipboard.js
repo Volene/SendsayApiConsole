@@ -14,7 +14,6 @@ import { setCopied,setCopiedId} from "../../redux/features/ui";
     dispatch(setCopied(true));  
   };
 
-
   return (
     <CopyToClipboard onCopy={onCopy} text={query}>
       {children}

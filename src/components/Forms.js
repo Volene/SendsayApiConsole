@@ -35,7 +35,7 @@ export const Forms = () => {
   const { register, handleSubmit, errors } = useForm({
     mode: "onSubmit",
     reValidateMode: "onSubmit",
-    shouldFocusError: true,
+    shouldFocusError:false,
     resolver: yupResolver(schema),
   });
 
