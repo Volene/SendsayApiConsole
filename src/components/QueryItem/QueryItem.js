@@ -6,9 +6,6 @@ import "./QueryItem.css";
 import { setCopied } from "../../redux/features/ui";
 import { ReactComponent as DropdownIcon } from "../../img/dropdown.svg";
 
-
-
-
 export const QueryItem = (props) => {
   const dispatch = useDispatch();
   const [isHovered, setHovered] = useState(false);
@@ -45,12 +42,9 @@ export const QueryItem = (props) => {
       placement={{
         anchor: "BOTTOM_RIGHT",
         possibleAnchors: [
-
           "BOTTOM_CENTER",
-
           "TOP_CENTER",
         ],
-
         autoAdjust: true,
         preferX: "RIGHT",
         triggerOffset: 30,

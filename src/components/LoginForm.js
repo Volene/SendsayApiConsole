@@ -16,8 +16,7 @@ const LoginForm = () => {
   const isLogging = useSelector((state) => state.authSlice.logging);
 
   const containsProhibitedCharacters = (string) => /[^a-z_0-9]+/gi.test(string);
-  const passwordContainsProhibitedCharacters = (string) =>
-    /[^a-z_0-9\s]+/gi.test(string);
+  const passwordContainsProhibitedCharacters = (string) =>/[^a-z_0-9\s]+/gi.test(string);
 
   const schema = yup.object({
     loginName:
@@ -45,13 +44,6 @@ const LoginForm = () => {
     submitFocusError: true,
     resolver: yupResolver(schema),
   });
-
-  const styles = {
-    inputErrorStyle: {
-      border: "1px solid #CF2C00",
-      boxShadow: "0px 0px 5px rgba(207, 44, 0, 0.5)",
-    },
-  };
 
   const onSubmit = async (data) => {
     dispatch(sendSayAuth(data));
@@ -92,8 +84,7 @@ const LoginForm = () => {
 
           <div className="input-wrapper">
             <div
-              className={`input_label `}
-              style={errors.loginName && styles.divErrorStyle}
+              className={`input__label ${errors.password && 'input_label--error'}`}
             >
               Логин
             </div>
@@ -122,8 +113,7 @@ const LoginForm = () => {
 
           <div className="input-wrapper">
             <div
-              className="input_label"
-              style={errors.password && styles.divErrorStyle}
+              className={`input__label ${errors.password && 'input_label--error'}`}
             >
               Пароль
             </div>

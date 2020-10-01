@@ -2,12 +2,12 @@ import React from "react";
 import LogoutIcon from "../img/log-out.svg";
 
 export const Logout = (props) => {
-  const { onLogoutClick } = props;
+  const { logout} = props;
 
   return (
     <div
       tabIndex={0}
-      onClick={onLogoutClick}
+      onClick={logout}
       className="header__logout-button logout-button"
     >
       <div className="logout-button__label">Выйти</div>

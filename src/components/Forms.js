@@ -5,11 +5,9 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers";
 import "./Forms.css";
 import { SplitContainer } from "./SplitContainer";
-import {
-  getQueryResponse,
-} from "../redux/features/queryHistorySlice";
+import { getQueryResponse } from "../redux/features/queryHistorySlice";
 import { ReactComponent as FmIcon } from "../img/align-right.svg";
-import octocat from "../img/Octocat.jpg";
+import octocat from "../img/octocat.webp";
 
 export const Forms = () => {
   const containsProhibitedCharacters = (string) => /[^.a-z]+/gi.test(string);
@@ -63,6 +61,7 @@ export const Forms = () => {
   const formatJSON = () => {
     try {
       const str = JSON.stringify(JSON.parse(requestRef.current.value), null, 4);
+      //^_^//
       requestRef.current.value = str;
     } catch {}
   };
@@ -129,7 +128,6 @@ export const Forms = () => {
             </div>
             <div className="forms__control">
               <button type="submit">Отправить</button>
-
               <a
                 href="https://github.com/Volene"
                 target="_blank"

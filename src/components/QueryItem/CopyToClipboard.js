@@ -5,7 +5,8 @@ import "./CopyToClipBoard.css";
 import { setCopied,setCopiedId} from "../../redux/features/ui";
 
 
-export const CopyToClipboardContainer = ({ id,query,children }) => {
+
+ const CopyToClipboardMenuItem = ({ id,query,children }) => {
   const dispatch = useDispatch();
   
   const onCopy = () => {
@@ -21,3 +22,4 @@ export const CopyToClipboardContainer = ({ id,query,children }) => {
   );
 };
 
+export {CopyToClipboardMenuItem}
