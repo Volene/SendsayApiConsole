@@ -2,7 +2,8 @@ import Sendsay from "sendsay-api";
 import Cookies from "js-cookie";
 
 const sendsayApi = new Sendsay();
-const getLogin = {
+
+const userNameOptions = {
   action: "sys.settings.get",
   list: ["about.id", "about.name"],
 };
@@ -12,23 +13,24 @@ const sendRequest = async (query) => {
   return res;
 };
 
-const loginUser = async (username, sublogin, password) => {
+const userLogin = async (username, sublogin, password) => {
   await sendsayApi.login({
     login: username,
     sublogin: sublogin,
     password: password,
   });
 
-  const res = await sendsayApi.request(getLogin);
+  const userName = await sendsayApi.request(userNameOptions);
   const currentSession = sendsayApi.session;
-  Cookies.set("sendsay_session", currentSession);
-  return res;
+  Cookies.set("sendsay_session", currentSession,{});
+  
+  return userName;
 };
 
 const renewSession = async () => {
   await sendsayApi.setSessionFromCookie();
-  const res = await sendsayApi.request(getLogin);
-  return res;
+  const userName = await sendsayApi.request(userNameOptions);
+  return userName;
 };
 
-export { sendsayApi, sendRequest, renewSession, loginUser };
+export { sendsayApi, sendRequest, renewSession, userLogin };

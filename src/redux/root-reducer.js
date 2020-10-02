@@ -10,13 +10,10 @@ const appReducer = combineReducers({
   querySlice,
   uiSlice,
 });
+
 export const rootReducer = (state, action) => {
-  if (action.type === 'auth/logout') {
+  if (action.type === "auth/logout") {
     state = undefined;
   }
   return appReducer(state, action);
 };
-
-// export const rootReducer = (state, action) => {
-//   return appReducer(state, action);
-// };

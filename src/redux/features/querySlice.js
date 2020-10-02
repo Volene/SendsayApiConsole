@@ -11,5 +11,6 @@ export const querySlice = createSlice({
     },
   },
 });
+
 export default querySlice.reducer;
 export const { setQuery } = querySlice.actions;

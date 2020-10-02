@@ -45,7 +45,7 @@ const LoginForm = () => {
   const { register, handleSubmit, errors } = useForm({
     mode: "onSubmit",
     reValidateMode: "onChange",
-    shouldFocusError:false,
+    shouldFocusError: false,
     resolver: yupResolver(schema),
   });
 

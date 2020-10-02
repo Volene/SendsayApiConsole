@@ -86,8 +86,6 @@ export const queriesHistorySlice = createSlice({
 
 const persistedReducer = persistReducer(persistConfig, queriesHistorySlice.reducer);
 
-// export default queriesHistorySlice.reducer;
-
 export default persistedReducer
 export const {
   requestStart,

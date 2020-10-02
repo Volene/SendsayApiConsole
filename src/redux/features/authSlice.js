@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { loginUser, renewSession } from "../../api/sendsay-api";
+import { userLogin, renewSession } from "../../api/sendsay-api";
 
 const initialState = {
   login: "",
@@ -48,7 +48,7 @@ export const sendSayAuth = ({
 }) => async (dispatch) => {
   try {
     dispatch(loginStart());
-    const { list } = await loginUser(loginName, subLoginName, password);
+    const { list } = await userLogin(loginName, subLoginName, password);
     const [sublogin, login] = [list["about.id"], list["about.name"]];
 
     loginName === subLoginName

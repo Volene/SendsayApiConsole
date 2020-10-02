@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers";
 import "./Forms.css";
 import { SplitContainer } from "./SplitContainer";
 import { getQueryResponse } from "../redux/features/queryHistorySlice";
+import Loader from "../img/loader.svg";
 import { ReactComponent as FmIcon } from "../img/align-right.svg";
 import octocat from "../img/octocat.webp";
 
@@ -27,11 +28,14 @@ export const Forms = () => {
   const currentRequest = useSelector(
     (state) => state.queryHistorySlice.currentRequest
   );
+  
   const executedRequest = useSelector((state) => state.querySlice.query);
+  const isLoading=useSelector((state)=>state.queryHistorySlice.loading);
 
   const dispatch = useDispatch();
   const requestRef = useRef();
   const responseRef = useRef();
+
   const { register, handleSubmit, errors } = useForm({
     mode: "onSubmit",
     reValidateMode: "onSubmit",
@@ -127,7 +131,7 @@ export const Forms = () => {
               </SplitContainer>
             </div>
             <div className="forms__control">
-              <button type="submit">Отправить</button>
+              <button type="submit" className="login__button"> {isLoading ? <img src={Loader} alt="loader" /> : "Отправить"}</button>
               <a
                 href="https://github.com/Volene"
                 target="_blank"
