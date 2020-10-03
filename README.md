@@ -1,4 +1,4 @@
-Для использования нужно зарегистрироваться тут https://sendsay.ru/
+Для использования нужно зарегистрироваться тут https://sendsay.ru/ \n
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
