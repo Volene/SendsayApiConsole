@@ -30,7 +30,7 @@ body {
 .page__body {
   display: flex;
   flex-direction: column;
-  height:90vh
+  height:89vh
 }
 @media only screen and (max-height: 900px) {
   .page__body{

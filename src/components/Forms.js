@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
+import { object, string } from "yup";
 import { yupResolver } from "@hookform/resolvers";
 import "./Forms.css";
 import { SplitContainer } from "./SplitContainer";
@@ -9,18 +9,19 @@ import { getQueryResponse } from "../redux/features/queryHistorySlice";
 import Loader from "../img/loader.svg";
 import { ReactComponent as FmIcon } from "../img/align-right.svg";
 import octocat from "../img/octocat.webp";
+import { serialize } from "../utils";
 
-export const Forms = () => {
+const Forms = () => {
   const containsProhibitedCharacters = (string) => /[^.a-z]+/gi.test(string);
 
-  const schema = yup.object({
-    req: yup.object({
-      action: yup
-        .string()
+  const schema = object({
+    req: object({
+      action: string()
         .test(
           "Should not contain a prohibited characters",
           (value) => !containsProhibitedCharacters(value)
         )
+        .transform((value) => value.trim())
         .required(),
     }),
   });
@@ -28,9 +29,9 @@ export const Forms = () => {
   const currentRequest = useSelector(
     (state) => state.queryHistorySlice.currentRequest
   );
-  
+
   const executedRequest = useSelector((state) => state.querySlice.query);
-  const isLoading=useSelector((state)=>state.queryHistorySlice.loading);
+  const isLoading = useSelector((state) => state.queryHistorySlice.loading);
 
   const dispatch = useDispatch();
   const requestRef = useRef();
@@ -39,7 +40,7 @@ export const Forms = () => {
   const { register, handleSubmit, errors } = useForm({
     mode: "onSubmit",
     reValidateMode: "onSubmit",
-    shouldFocusError:false,
+    shouldFocusError: false,
     resolver: yupResolver(schema),
   });
 
@@ -64,7 +65,7 @@ export const Forms = () => {
 
   const formatJSON = () => {
     try {
-      const str = JSON.stringify(JSON.parse(requestRef.current.value), null, 4);
+      const str = serialize(JSON.parse(requestRef.current.value));
       //^_^//
       requestRef.current.value = str;
     } catch {}
@@ -131,7 +132,10 @@ export const Forms = () => {
               </SplitContainer>
             </div>
             <div className="forms__control">
-              <button type="submit" className="login__button"> {isLoading ? <img src={Loader} alt="loader" /> : "Отправить"}</button>
+              <button type="submit" className="login__button">
+                {" "}
+                {isLoading ? <img src={Loader} alt="loader" /> : "Отправить"}
+              </button>
               <a
                 href="https://github.com/Volene"
                 target="_blank"
@@ -167,3 +171,5 @@ export const Forms = () => {
     </>
   );
 };
+
+export { Forms };

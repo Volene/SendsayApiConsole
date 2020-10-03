@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./LoginForm.css";
 import { useForm } from "react-hook-form";
 import Cookies from "js-cookie";
-import * as yup from "yup";
+import { lazy, object, string } from "yup";
 import { yupResolver } from "@hookform/resolvers";
 import { sendSayAuth, renewSessions } from "../redux/features/authSlice";
 import Logo from "../img/logo.svg";
@@ -18,27 +18,31 @@ const LoginForm = () => {
   const containsProhibitedCharacters = (string) => /[^a-z_0-9]+/gi.test(string);
   const passwordContainsProhibitedCharacters = (string) =>
     /[^a-z_0-9\s]+/gi.test(string);
-  const emailSchema = yup.string().email().required();
+  const emailSchema = string().email().required();
 
-  const schema = yup.object({
-    loginName: yup.lazy((val) =>
+  const schema = object({
+    loginName: lazy((val) =>
       emailSchema.isValidSync(val)
-        ? yup.string().email().required()
-        : yup
-            .string()
+        ? string()
+            .transform((value) => value.trim())
+            .email()
+            .required()
+        : string()
+            .transform((value) => value.trim())
             .test(
               "Should not contain a prohibited characters",
               (value) => !containsProhibitedCharacters(value)
             )
             .required()
     ),
-    subLoginName: yup.string().min(3),
-    password: yup
-      .string()
+    subLoginName: string().min(3),
+    password: string()
+      .transform((value) => value.trim())
       .test(
         "Should not contain a prohibited characters",
         (value) => !passwordContainsProhibitedCharacters(value)
       )
+
       .required(),
   });
 
