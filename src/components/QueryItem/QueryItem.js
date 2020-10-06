@@ -33,7 +33,9 @@ export const QueryItem = (props) => {
             style={{
               ...layerProps.style,
               width: 126,
-              left: layerProps.style.left + 15 || 0,
+              left : layerProps.style.left + 15 < 0
+                ? 0
+                : layerProps.style.left + 15,
             }}
           />
         )

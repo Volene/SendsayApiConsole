@@ -15,15 +15,13 @@ function App() {
       {!isAuth ? (
         <LoginForm />
       ) : (
-        <>
-          <FullScreen handle={handle}>
-            <div className="header-container">
-              <Header fullscreenHandler={handle}></Header>
-              <HistoryTrack></HistoryTrack>
-            </div>
-            <Forms></Forms>{" "}
-          </FullScreen>
-        </>
+        <FullScreen handle={handle}>
+          <div className="header-container">
+            <Header fullscreenHandler={ handle }></Header>
+            <HistoryTrack/>
+          </div>
+          <Forms/>
+        </FullScreen>
       )}
     </div>
   );

@@ -13,17 +13,9 @@ export const HistoryTrack = () => {
   return (
     <div className="history-track">
       <div className="history-track__queries queries">
-        {queries.map(({ id, type, query, res, error, dropdownMenuOpened }) => (
-          <QueryItem
-            key={id}
-            id={id}
-            type={type}
-            res={res}
-            query={query}
-            error={error}
-            menuOpened={dropdownMenuOpened}
-          />
-        ))}
+        { queries.map(({ ...props }) => (
+          <QueryItem { ...props }/>
+        )) }
       </div>
       <div className="gradient"></div>
       <div
