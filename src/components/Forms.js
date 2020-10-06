@@ -147,7 +147,7 @@ const Forms = () => {
                     style={{ width: "40px" }}
                     src={octocat}
                     alt="octocat"
-                  />{" "}
+                  />
                   Volene
                   <img
                     className="github-logo"
@@ -161,8 +161,8 @@ const Forms = () => {
                 <FmIcon
                   className="format_icon"
                   alt="Formatting Button"
-                ></FmIcon>
-                <div>Форматировать</div>
+                />
+                <span>Форматировать</span>
               </div>
             </div>
           </div>

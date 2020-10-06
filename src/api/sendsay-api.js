@@ -8,10 +8,7 @@ const userNameOptions = {
   list: ["about.id", "about.name"],
 };
 
-const sendRequest = async (query) => {
-  const res = await sendsayApi.request(query);
-  return res;
-};
+const sendRequest = async (query) => await sendsayApi.request(query)
 
 const userLogin = async (username, sublogin, password) => {
   await sendsayApi.login({
@@ -29,8 +26,7 @@ const userLogin = async (username, sublogin, password) => {
 
 const renewSession = async () => {
   await sendsayApi.setSessionFromCookie();
-  const userName = await sendsayApi.request(userNameOptions);
-  return userName;
+  return await sendsayApi.request(userNameOptions);
 };
 
 export { sendsayApi, sendRequest, renewSession, userLogin };
