@@ -1,4 +1,6 @@
 Для использования нужно зарегистрироваться тут https://sendsay.ru/ 
+
+
 Документация к API https://sendsay.ru/api/api.html
 
 
