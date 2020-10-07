@@ -1,4 +1,5 @@
 Для использования нужно зарегистрироваться тут https://sendsay.ru/ 
+Документация к API https://sendsay.ru/api/api.html
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
