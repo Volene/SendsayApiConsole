@@ -1,3 +1,6 @@
+Deployed version https://sendsay-api-console.vercel.app/
+
+
 Для использования нужно зарегистрироваться тут https://sendsay.ru/ 
 
 
