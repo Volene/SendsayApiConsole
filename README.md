@@ -6,11 +6,8 @@ Deployed version https://sendsay-api-console.vercel.app/
 
 Документация к API https://sendsay.ru/api/api.html
 
-Пример валидного запроса - {
-
- "action" : "pong" 
-
-}
+Пример валидного запроса 
+###{"action" : "pong" }
 
 
 
