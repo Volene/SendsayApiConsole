@@ -6,6 +6,13 @@ Deployed version https://sendsay-api-console.vercel.app/
 
 Документация к API https://sendsay.ru/api/api.html
 
+Пример валидного запроса - {
+
+ "action" : "pong" 
+
+}
+
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
