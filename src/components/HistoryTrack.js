@@ -6,16 +6,15 @@ import { removeQueries } from "../redux/features/queryHistorySlice";
 import clearIcon from "../img/clearhistory.svg";
 
 export const HistoryTrack = () => {
-
   const queries = useSelector((state) => state.queryHistorySlice.queries);
   const dispatch = useDispatch();
 
   return (
     <div className="history-track">
       <div className="history-track__queries queries">
-        { queries.map(({ ...props }) => (
-          <QueryItem { ...props }/>
-        )) }
+        {queries.map(({ ...props }) => (
+          <QueryItem key={props.id} {...props} />
+        ))}
       </div>
       <div className="gradient"></div>
       <div

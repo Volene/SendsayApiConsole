@@ -43,7 +43,6 @@ export const QueryItem = (props) => {
       placement={{
         anchor: "BOTTOM_RIGHT",
         possibleAnchors: ["BOTTOM_CENTER", "TOP_CENTER"],
-        // autoAdjust: true,
         preferX: "RIGHT",
         triggerOffset: 30,
       }}

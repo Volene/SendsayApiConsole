@@ -1,13 +1,13 @@
 import { sendRequest } from "../../api/sendsay-api";
 import { serialize } from "../../utils";
 import { createSlice } from "@reduxjs/toolkit";
-import storage from 'redux-persist/lib/storage'
-import { persistReducer } from 'redux-persist'
+import storage from "redux-persist/lib/storage";
+import { persistReducer } from "redux-persist";
 
 const persistConfig = {
-  key: 'root',
+  key: "root",
   storage,
-  whitelist:['queries']
+  whitelist: ["queries"],
 };
 
 const initialState = {
@@ -43,9 +43,8 @@ export const queriesHistorySlice = createSlice({
           .split(":")[1]
           .replace(/[^\w.]/g, "") ?? "";
 
-      const id = new Date().toISOString();
       const queryObject = {
-        id: id,
+        id: payload.id,
         type: actionType,
         query: payload.query,
         res: payload.response,
@@ -73,7 +72,7 @@ export const queriesHistorySlice = createSlice({
         if (state.queries > 15) state.queries.pop();
       }
     },
-    removeQuery: (state, queryId) => {
+    removeQuery: (state, { payload: queryId }) => {
       const idx = state.queries.findIndex((query) => query.id === queryId);
       state.queries.splice(idx, 1);
     },
@@ -83,10 +82,12 @@ export const queriesHistorySlice = createSlice({
   },
 });
 
+const persistedReducer = persistReducer(
+  persistConfig,
+  queriesHistorySlice.reducer
+);
 
-const persistedReducer = persistReducer(persistConfig, queriesHistorySlice.reducer);
-
-export default persistedReducer
+export default persistedReducer;
 export const {
   requestStart,
   requestFailed,
@@ -98,9 +99,9 @@ export const {
   removeQueries,
 } = queriesHistorySlice.actions;
 
-
 export const getQueryResponse = (query) => async (dispatch) => {
   const serializedQuery = serialize(query);
+  const id = new Date().toISOString();
   try {
     dispatch(requestStart());
     const res = await sendRequest(query);
@@ -109,6 +110,7 @@ export const getQueryResponse = (query) => async (dispatch) => {
       addQuery({
         query: serializedQuery,
         response: serializedResponse,
+        id: id,
       })
     );
     dispatch(requestSuccess());
@@ -117,6 +119,7 @@ export const getQueryResponse = (query) => async (dispatch) => {
     const serializedError = serialize(error);
     dispatch(
       addQuery({
+        id: id,
         query: serializedQuery,
         response: serializedError,
         error: true,
